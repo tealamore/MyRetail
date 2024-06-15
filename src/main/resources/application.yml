@@ -1,3 +1,7 @@
+info:
+  app:
+    version: 1.0.0
+
 cassandra:
     contactPoints: localhost
     port: 9042
@@ -7,3 +11,6 @@ cassandra:
 redsky:
   url: https://redsky.target.com/
 
+swagger:
+  title: My Retail Service
+  description: This application aggregates data about a product from Cassandra and the RedSky API

@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Mono
 
 @RestController
-@RequestMapping("products")
+@RequestMapping("product")
 class RetailController {
     @Autowired
     private lateinit var retailService: RetailService
 
-    @GetMapping(value = ["/{id}"])
+    @GetMapping(value = ["/{id}"], produces = ["application/json"])
     fun getItem(@PathVariable("id") id: Int): Mono<ItemDetailsDto> {
         return retailService.getItem(id)
                 .switchIfEmpty(Mono.error(ItemNotFoundException(id)))
     }
 
-    @PostMapping(value = ["/{id}"], consumes = ["application/json"])
+    @PostMapping(value = ["/{id}"], consumes = ["application/json"], produces = ["application/json"])
     fun updateItemPriceDetails(@PathVariable("id") id: Int,
                                @RequestBody priceDetailsDto: UpdateItemPriceDetailsDto): Mono<UpdateItemPriceDetailsDto> {
         return retailService.updateItemPriceDetails(id, priceDetailsDto)
