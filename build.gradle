@@ -58,19 +58,10 @@ dependencies {
 	testCompile('io.projectreactor:reactor-test')
 	testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
 	testCompile('org.springframework.security:spring-security-test')
-
-//	compile('org.springframework.boot:spring-boot-starter-security')
-//	compile('com.microsoft.azure:azure-keyvault-secrets-spring-boot-starter')
-//	compile('com.microsoft.azure:azure-spring-boot')
-//	compile('com.microsoft.azure:azure-storage-spring-boot-starter')
-//	compile('org.springframework.cloud:spring-cloud-gcp-starter')
-//	compile('org.springframework.cloud:spring-cloud-gcp-starter-storage')
 }
 
 dependencyManagement {
 	imports {
-//		mavenBom "org.springframework.cloud:spring-cloud-gcp-dependencies:${springCloudGcpVersion}"
-//		mavenBom "com.microsoft.azure:azure-spring-boot-bom:${azureVersion}"
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
 }

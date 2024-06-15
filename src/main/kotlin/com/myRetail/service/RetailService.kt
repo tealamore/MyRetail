@@ -24,8 +24,9 @@ class RetailService {
                 .map { ItemDetailsDto(id, name = it.t1, current_price = CurrentPriceDto(priceDetailsDto = it.t2)) }
     }
 
-    fun updateItemPriceDetails(updateItemPriceDetailsDto: UpdateItemPriceDetailsDto): Mono<UpdateItemPriceDetailsDto> {
-        val priceDetailsDto = PriceDetailsDto(updateItemPriceDetailsDto)
+    fun updateItemPriceDetails(id: Int, updateItemPriceDetailsDto: UpdateItemPriceDetailsDto): Mono<UpdateItemPriceDetailsDto> {
+        val priceDetailsDto = PriceDetailsDto(id, updateItemPriceDetailsDto)
+
         return priceDetailsDao.save(priceDetailsDto)
                                 .map { UpdateItemPriceDetailsDto(it) }
     }

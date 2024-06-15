@@ -2,13 +2,11 @@ package com.myRetail.service
 
 import com.myRetail.client.RedskyClient
 import com.myRetail.dao.PriceDetailsDao
-import com.myRetail.model.RedskyDetailsDto
 import com.myRetail.model.PriceDetailsDto
 import com.myRetail.model.PriceDetailsKey
 import com.myRetail.model.request.UpdateItemPriceDetailsDto
 import com.myRetail.model.response.CurrentPriceDto
 import com.myRetail.model.response.ItemDetailsDto
-import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
@@ -74,20 +72,24 @@ class RetailServiceTest {
 
     @Test
     fun `should return passed in value for dao save`() {
-        val updateItemPriceDetailsDto = UpdateItemPriceDetailsDto(6, 0.5, "test currency")
-        `when`(priceDetailsDao.save(PriceDetailsDto(updateItemPriceDetailsDto))).thenReturn(Mono.just(PriceDetailsDto(updateItemPriceDetailsDto)))
+        val updateItemPriceDetailsDto = UpdateItemPriceDetailsDto(0.5, "test currency")
+        val priceDetailsDto = PriceDetailsDto(6, updateItemPriceDetailsDto)
 
-        val response = retailService.updateItemPriceDetails(updateItemPriceDetailsDto).block()
+        `when`(priceDetailsDao.save(priceDetailsDto)).thenReturn(Mono.just(priceDetailsDto))
+
+        val response = retailService.updateItemPriceDetails(6, updateItemPriceDetailsDto).block()
 
         assertThat<UpdateItemPriceDetailsDto>(response, `is`<UpdateItemPriceDetailsDto>(updateItemPriceDetailsDto))
     }
 
     @Test
     fun `should return mono of null when dao save fails`() {
-        val updateItemPriceDetailsDto = UpdateItemPriceDetailsDto(6, 0.5, "test currency")
-        `when`(priceDetailsDao.save(PriceDetailsDto(updateItemPriceDetailsDto))).thenReturn(Mono.empty())
+        val updateItemPriceDetailsDto = UpdateItemPriceDetailsDto(0.5, "test currency")
+        val priceDetailsDto = PriceDetailsDto(6, updateItemPriceDetailsDto)
 
-        val response = retailService.updateItemPriceDetails(updateItemPriceDetailsDto).block()
+        `when`(priceDetailsDao.save(priceDetailsDto)).thenReturn(Mono.empty())
+
+        val response = retailService.updateItemPriceDetails(6, updateItemPriceDetailsDto).block()
 
         assertThat<UpdateItemPriceDetailsDto>(response, nullValue())
     }

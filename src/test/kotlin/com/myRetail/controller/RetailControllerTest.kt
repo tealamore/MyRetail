@@ -56,12 +56,12 @@ class RetailControllerTest {
     @Test
     fun `returns response from service updateItemPriceDetails`() {
         try {
-            val request = UpdateItemPriceDetailsDto(6, 0.5, "USD")
+            val request = UpdateItemPriceDetailsDto(0.5, "USD")
             val expectedResponse = request
             val serviceResponse = Mono.just(request)
-            `when`(service.updateItemPriceDetails(request)).thenReturn(serviceResponse)
+            `when`(service.updateItemPriceDetails(6, request)).thenReturn(serviceResponse)
 
-            val response = controller.updateItemPriceDetails(request).block()
+            val response = controller.updateItemPriceDetails(6, request).block()
 
             assertThat<UpdateItemPriceDetailsDto>(response, `is`<UpdateItemPriceDetailsDto>(expectedResponse))
         } catch (e: Exception) {
@@ -72,11 +72,11 @@ class RetailControllerTest {
     @Test
     fun `returns response from service updateItemPriceDetails for failure`() {
         try {
-            val request = UpdateItemPriceDetailsDto(6, 0.5, "USD")
+            val request = UpdateItemPriceDetailsDto(0.5, "USD")
             val serviceResponse = Mono.empty<UpdateItemPriceDetailsDto>()
-            `when`(service.updateItemPriceDetails(request)).thenReturn(serviceResponse)
+            `when`(service.updateItemPriceDetails(6, request)).thenReturn(serviceResponse)
 
-            controller.updateItemPriceDetails(request).block()
+            controller.updateItemPriceDetails(6, request).block()
 
             assert(false)
         } catch (e: Exception) {

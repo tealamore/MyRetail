@@ -22,7 +22,7 @@ class CassandraConfig : AbstractReactiveCassandraConfiguration() {
     @Value("\${cassandra.keyspace}")
     private lateinit var keyspace: String
 
-    @Value("\${cassandra.basePackages}") //TODO: Why do we need values and why can't we use @ConfigurationProperties
+    @Value("\${cassandra.basePackages}")
     private lateinit var basePackages: String
 
     override fun getKeyspaceName(): String {

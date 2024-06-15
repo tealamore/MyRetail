@@ -20,9 +20,10 @@ class RetailController {
                 .switchIfEmpty(Mono.error(ItemNotFoundException(id)))
     }
 
-    @PostMapping(value = ["/"], consumes = ["application/json"])
-    fun updateItemPriceDetails(@RequestBody priceDetailsDto: UpdateItemPriceDetailsDto): Mono<UpdateItemPriceDetailsDto> {
-        return retailService.updateItemPriceDetails(priceDetailsDto)
-                .switchIfEmpty(Mono.error(ItemNotFoundException(priceDetailsDto.id)))
+    @PostMapping(value = ["/{id}"], consumes = ["application/json"])
+    fun updateItemPriceDetails(@PathVariable("id") id: Int,
+                               @RequestBody priceDetailsDto: UpdateItemPriceDetailsDto): Mono<UpdateItemPriceDetailsDto> {
+        return retailService.updateItemPriceDetails(id, priceDetailsDto)
+                .switchIfEmpty(Mono.error(ItemNotFoundException(id)))
     }
 }
