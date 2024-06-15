@@ -1,0 +1,9 @@
+cassandra:
+    contactPoints: localhost
+    port: 9042
+    keyspace: target
+    basePackages: com.myRetail
+
+redsky:
+  url: https://redsky.target.com/
+
